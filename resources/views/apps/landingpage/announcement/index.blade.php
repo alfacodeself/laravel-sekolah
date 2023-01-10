@@ -53,7 +53,7 @@
             </div>
         </div>
     </section>
-    {{-- <section id="services" class="services">
+    <section id="services" class="services">
         <div class="container">
             <div class="section">
                 <div class="blog-post blog-single-post">
@@ -62,38 +62,38 @@
                     </div>
                     <div class="single-post-content">
                         <table class="events-list">
-                            @foreach ($eventNonactive as $event)
+                            @foreach ($announcementNonactive as $announcement)
                                 <tr>
                                     <td>
                                         <div class="event-date">
                                             <div class="event-day">
-                                                {{ \Carbon\Carbon::parse($event->tanggal)->translatedFormat('d') }}</div>
+                                                {{ \Carbon\Carbon::parse($announcement->tanggal_mulai)->translatedFormat('d') }}</div>
                                             <div class="event-month text-uppercase">
-                                                {{ \Carbon\Carbon::parse($event->tanggal)->translatedFormat('M') }}</div>
+                                                {{ \Carbon\Carbon::parse($announcement->tanggal_mulai)->translatedFormat('M') }}</div>
                                         </div>
                                     </td>
                                     <td>
-                                        {{ $event->catatan }}
+                                        <strong>{{ $announcement->catatan }}</strong>
                                     </td>
-                                    <td class="event-venue hidden-xs"><i class="bx bx-map-pin"></i> {{ $event->lokasi }}
-                                    </td>
-                                    <td class="event-price hidden-xs"><i class="bx bx-time"></i> {{ $event->waktu }}</td>
                                     <td>
-                                        @if ($event->thumbnail != null)
-                                            <a href="#" onclick="show({{ $event->id }})" class="btn btn-link btn-sm event-more">Lihat Thumbnail</a>
+                                        @if ($announcement->dokumen_pengumuman != null)
+                                            <a href="{{ url($announcement->dokumen_pengumuman) }}" class="btn btn-link text-success btn-sm event-more">Lihat Dokumen Pengumuman</a>
                                         @else
-                                            -
+                                            Tidak ada dokumen
                                         @endif
+                                    </td>
+                                    <td>
+                                        <a href="#" onclick="show({{ $announcement->id }})" class="btn btn-link btn-sm event-more">Detail Pengumuman</a>
                                     </td>
                                 </tr>
                             @endforeach
                         </table>
-                        {{ $eventNonactive->links() }}
+                        {{ $announcementNonactive->links() }}
                     </div>
                 </div>
             </div>
         </div>
-    </section> --}}
+    </section>
 @endsection
 @push('css')
     <style>

@@ -29,6 +29,7 @@ class SchoolRequest extends FormRequest
         return [
             'logo' => $logo . '|image|mimes:png,jpg,jpeg,gif|max:5000',
             'nama' => 'required',
+            'alamat' => 'required',
             'sejarah' => 'required',
             'visi' => 'required',
             'misi' => 'required',
@@ -36,7 +37,7 @@ class SchoolRequest extends FormRequest
             'nomor_telpon' => 'nullable|numeric',
             'facebook' => 'nullable',
             'instagram' => 'nullable',
-            'whatsapp' => 'nullable',
+            'whatsapp' => 'nullable|numeric',
         ];
     }
     public function messages()
@@ -47,11 +48,13 @@ class SchoolRequest extends FormRequest
             'logo.mimes' => 'Logo sekolah harus memiliki format png,jpg,jpeg,gif!',
             'logo.max' => 'Logo sekolah maksimal 5MB!',
             'nama.required' => 'Nama sekolah tidak boleh kosong!',
+            'alamat.required' => 'Alamat sekolah tidak boleh kosong!',
             'sejarah.required' => 'Sejarah sekolah tidak boleh kosong!',
             'visi.required' => 'Visi sekolah tidak boleh kosong!',
             'misi.required' => 'Misi sekolah tidak boleh kosong!',
             'email.email' => 'Harap masukkan email sekolah yang valid!',
-            'nomor_telpon.numeric' => 'Nomor telpon sekolah harus berupa angka!'
+            'nomor_telpon.numeric' => 'Nomor telpon sekolah harus berupa angka!',
+            'whatsapp.numeric' => 'Nomor whatsapp sekolah harus berupa angka!'
         ];
     }
 }

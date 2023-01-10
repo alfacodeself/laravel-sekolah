@@ -5,7 +5,7 @@
         {{-- Carrousel --}}
         <x-landingpage.carrousel></x-landingpage.carrousel>
 
-        {{-- Agenda --}}
+        {{-- Tentang --}}
         <section id="services" class="services mt-5">
             <div class="container">
                 <div class="section-title">
@@ -14,10 +14,10 @@
                 <div class="card p-4" style="border: 3px solid rgb(230, 104, 0)">
                     {{-- <h4 class="card-title" style="font-weight: 800">{{ $school->nama }}</h4> --}}
                     <div class="row">
-                        <div class="col-md-4 p-3">
+                        <div class="col-md-2 p-3">
                             <img src="{{ $school->logo }}" alt="logo" style="width: 100%;">
                         </div>
-                        <div class="col-md-3 px-3">
+                        <div class="col-md-5 px-3">
                             <h4 class="card-title" style="font-weight: 800">{{ $school->nama }}</h4>
                             <div class="card-block px-6">
                                 <p class="card-text">
@@ -25,15 +25,19 @@
                                         Sekolah</a>
                                 </p>
                                 <p class="card-text">
-                                    <a href="{{ route('profile.purpose') }}"><i class="bi bi-file-earmark-post"></i> Visi dan
+                                    <a href="{{ route('profile.purpose') }}"><i class="bi bi-file-earmark-post"></i> Visi
+                                        dan
                                         Misi Sekolah</a>
                                 </p>
                                 <p class="card-text">
                                     <i class="bi bi-telephone"></i> {{ $school->nomor_telpon }}
                                 </p>
+                                <p class="card-text">
+                                    <i class="bi bi-pin-map"></i> {{ $school->alamat }}
+                                </p>
                             </div>
                         </div>
-                        <div class="col-md-3 px-3">
+                        <div class="col-md-5 px-3">
                             <h4 class="card-title" style="font-weight: 800">Sosial Media</h4>
                             <div class="card-block px-6">
                                 @if ($school->facebook != null)
@@ -63,7 +67,7 @@
             </div>
         </section>
         {{-- Agenda --}}
-        <section id="services" class="services mt-5">
+        <section id="services" class="services">
             <div class="container">
                 <div class="section-title">
                     <h2>Agenda</h2>
@@ -94,7 +98,7 @@
                                         </td>
                                         <td>
                                             @if ($event->thumbnail != null)
-                                                <a href="#" onclick="show({{ $event->id }})"
+                                                <a href="#" onclick="showEvent({{ $event->id }})"
                                                     class="btn btn-link btn-sm event-more">Lihat Thumbnail</a>
                                             @else
                                                 -
@@ -109,6 +113,47 @@
                 </div>
             </div>
         </section>
+        {{-- Pengumuman --}}
+        <section id="services" class="services">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Pengumuman</h2>
+                </div>
+                <div class="section">
+                    <div class="blog-post blog-single-post">
+                        <div class="single-post-content">
+                            <table class="events-list">
+                                @foreach ($announcements as $announcement)
+                                    <tr>
+                                        <td>
+                                            <div class="event-date">
+                                                <div class="event-day">
+                                                    {{ \Carbon\Carbon::parse($announcement->tanggal_mulai)->translatedFormat('d') }}</div>
+                                                <div class="event-month text-uppercase">
+                                                    {{ \Carbon\Carbon::parse($announcement->tanggal_mulai)->translatedFormat('M') }}</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <strong>{{ $announcement->catatan }}</strong>
+                                        </td>
+                                        <td>
+                                            @if ($announcement->dokumen_pengumuman != null)
+                                                <a href="{{ url($announcement->dokumen_pengumuman) }}" class="btn btn-link text-success btn-sm event-more">Lihat Dokumen Pengumuman</a>
+                                            @else
+                                                Tidak ada dokumen
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="#" onclick="showAnnouncement({{ $announcement->id }})" class="btn btn-link btn-sm event-more">Detail Pengumuman</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         {{-- News --}}
         <section id="blog" class="blog">
             <div class="container" data-aos="fade-up">
@@ -118,7 +163,7 @@
                 <div class="row">
 
                     @isset($newsPopular)
-                        <div class="col-lg-7 col-12 entries">
+                        <div class="col-lg-{{ $news == null ? '12' : '7' }} col-12 entries">
 
                             <article class="entry">
 
@@ -159,24 +204,25 @@
                             </article>
                         </div>
                     @endisset
+                    @if($news != null)
+                        <div class="col-lg-5 col-12">
 
-                    <div class="col-lg-5 col-12">
+                            <div class="sidebar">
+                                <h3 class="sidebar-title">Berita Terbaru</h3>
+                                <div class="sidebar-item recent-posts">
+                                    @foreach ($news as $n)
+                                        <div class="post-item clearfix">
+                                            <img src="{{ url($n->thumbnail) }}" alt="">
+                                            <h4><a href="{{ route('news.show', $n->slug) }}">{{ $n->judul }}</a></h4>
+                                            <time datetime="2020-01-01">{{ $n->created_at->translatedFormat('d F Y') }}</time>
+                                        </div>
+                                    @endforeach
+                                </div>
 
-                        <div class="sidebar">
-                            <h3 class="sidebar-title">Berita Terbaru</h3>
-                            <div class="sidebar-item recent-posts">
-                                @foreach ($news as $n)
-                                    <div class="post-item clearfix">
-                                        <img src="{{ url($n->thumbnail) }}" alt="">
-                                        <h4><a href="{{ route('news.show', $n->slug) }}">{{ $n->judul }}</a></h4>
-                                        <time datetime="2020-01-01">{{ $n->created_at->translatedFormat('d F Y') }}</time>
-                                    </div>
-                                @endforeach
-                            </div>
+                            </div><!-- End sidebar -->
 
-                        </div><!-- End sidebar -->
-
-                    </div><!-- End blog sidebar -->
+                        </div>
+                    @endif
 
                 </div>
 
@@ -234,18 +280,20 @@
             /* border-top: 1px solid rgba(34, 36, 38, .1); */
             box-shadow: none;
         }
-        .card-block .card-text i{
+
+        .card-block .card-text i {
             margin-right: 10px;
             color: #b83603;
             font-size: 16px;
         }
-        
-        .card-block .card-text a{
+
+        .card-block .card-text a {
             margin-right: 10px;
             color: #b4b5ce;
             font-size: 14px;
         }
-        .card-block .card-text a:hover{
+
+        .card-block .card-text a:hover {
             margin-right: 10px;
             color: #1218bd;
             font-size: 14px;
@@ -260,6 +308,7 @@
             box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
             margin-top: 20px;
         }
+
         /* ============================================================== */
 
         table {
@@ -369,8 +418,23 @@
         var modal = document.getElementById("eventModal");
         var span = document.getElementsByClassName("close")[0];
 
-        function show(id) {
+        function showEvent(id) {
             let url = "{{ route('event.show', ':id') }}"
+            url = url.replace(':id', id)
+            // alert(url)
+            $.ajax({
+                url,
+                success: function(res) {
+                    $('.modal-body').html(res)
+                    modal.style.display = "block";
+                },
+                error: function(err) {
+                    alert(err);
+                }
+            })
+        }
+        function showAnnouncement(id) {
+            let url = "{{ route('announcement.show', ':id') }}"
             url = url.replace(':id', id)
             // alert(url)
             $.ajax({

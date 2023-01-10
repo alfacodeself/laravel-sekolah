@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('logo');
             $table->string('nama');
+            $table->string('alamat');
             $table->text('sejarah');
             $table->text('visi');
             $table->text('misi');

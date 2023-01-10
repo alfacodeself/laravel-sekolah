@@ -10,8 +10,8 @@ class AnnouncementController extends Controller
 {
     public function index()
     {
-        $announcementActive = Announcement::whereDate('tanggal_akhir', '>=', Carbon::now())->latest()->get();
-        $announcementNonactive = Announcement::whereDate('tanggal_akhir', '<', Carbon::now())->latest()->paginate(4);
+        $announcementActive = Announcement::whereDate('tanggal_akhir', '>=', Carbon::now())->orderBy('tanggal_awal', 'ASC')->get();
+        $announcementNonactive = Announcement::whereDate('tanggal_akhir', '<', Carbon::now())->orderBy('tanggal_akhir', 'DESC')->paginate(10);
         return view('apps.landingpage.announcement.index', compact('announcementActive', 'announcementNonactive'));
     }
     public function show(Announcement $announcement)

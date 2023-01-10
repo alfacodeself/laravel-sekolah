@@ -18,12 +18,15 @@
                             <x-form.input label='Nama Sekolah' name="nama" edit="{{ $school->nama }}"
                                 placeholder="Nama Sekolah">
                             </x-form.input>
+                            <x-form.text-area label="Alamat Sekolah" name="alamat" edit="{!! $school->alamat !!}"
+                                placeholder="Alamat Sekolah">
+                            </x-form.text-area>
                         </x-card.card>
                         <x-card.card :title="'Kontak Sekolah'">
                             <x-form.input type="email" label='Email Sekolah' edit="{{ $school->email }}" name="email"
                                 placeholder="Email Sekolah">
                             </x-form.input>
-                            <x-form.input type="number" label='Nomor Telpon Sekolah' edit="{{ $school->nomor_telpon }}"
+                            <x-form.input type="text" label='Nomor Telpon Sekolah' edit="{{ $school->nomor_telpon }}"
                                 name="nomor_telpon" placeholder="Nomor Telpon Sekolah"></x-form.input>
                             <x-form.input label='Facebook Sekolah' name="facebook" edit="{{ $school->facebook }}"
                                 placeholder="Facebook Sekolah">
@@ -61,11 +64,13 @@
                             </x-form.input>
                             <x-form.input label='Nama Sekolah' name="nama" placeholder="Nama Sekolah">
                             </x-form.input>
+                            <x-form.text-area label="Alamat Sekolah" name="alamat" placeholder="Alamat Sekolah">
+                            </x-form.text-area>
                         </x-card.card>
                         <x-card.card :title="'Kontak Sekolah'">
                             <x-form.input type="email" label='Email Sekolah' name="email" placeholder="Email Sekolah">
                             </x-form.input>
-                            <x-form.input type="number" label='Nomor Telpon Sekolah' name="nomor_telpon"
+                            <x-form.input type="text" label='Nomor Telpon Sekolah' name="nomor_telpon"
                                 placeholder="Nomor Telpon Sekolah"></x-form.input>
                             <x-form.input label='Facebook Sekolah' name="facebook" placeholder="Facebook Sekolah">
                             </x-form.input>
@@ -95,7 +100,7 @@
     <style>
         .ck-editor__editable[role="textbox"] {
             /* editing area */
-            min-height: 130px;
+            min-height: 170px;
         }
     </style>
 @endpush

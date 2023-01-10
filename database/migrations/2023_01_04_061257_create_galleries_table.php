@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('gambar');
             $table->string('catatan');
-            $table->string('deskripsi');
+            $table->text('deskripsi');
             $table->date('tanggal_pengambilan');
             $table->timestamps();
         });

@@ -8,6 +8,7 @@
                         Hubungi kami jika anda memiliki pertanyaan<br><br>
                         <strong>Telp:</strong> {{ $school->nomor_telpon }}<br>
                         <strong>Email:</strong> {{ $school->email }}<br>
+                        <strong>Alamat:</strong> {{ $school->alamat }}<br>
                     </p>
 
                 </div>
@@ -27,12 +28,12 @@
                             </a>
                         @endif
                         @if ($school->instagram != null)
-                            <a href="www.instagram.com/{{ $school->instagram }}" class="instagram">
+                            <a href="https://www.instagram.com/{{ $school->instagram }}" class="instagram">
                                 <i class="bx bxl-instagram"></i>
                             </a>
                         @endif
                         @if ($school->whatsapp != null)
-                            <a href="https://wa.me/62{{ $school->whatsapp }}" class="google-plus">
+                            <a href="https://wa.me/{{ $school->whatsapp }}" class="google-plus">
                                 <i class="bx bxl-whatsapp"></i>
                             </a>
                         @endif
