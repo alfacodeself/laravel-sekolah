@@ -46,14 +46,14 @@ class DashboardController extends Controller
         $data['tables'] = [
             [
                 'title' => 'Agenda Aktif',
-                'headers' => ['Thumbnail', 'Agenda', 'Lokasi', 'Tanggal', 'Waktu'],
-                'body' => ['thumbnail', 'catatan', 'lokasi', 'tanggal', 'waktu'],
+                'headers' => ['Agenda', 'Lokasi', 'Tanggal', 'Waktu'],
+                'body' => ['catatan', 'lokasi', 'tanggal', 'waktu'],
                 'data' => Event::whereDate('tanggal', '>=', Carbon::now())->get()->toArray()
             ],
             [
                 'title' => 'Pengumuman Aktif',
-                'headers' => ['Pengumuman', 'Deskripsi', 'Mulai', 'Selesai', 'Dokumen'],
-                'body' => ['catatan', 'deskripsi', 'tanggal_awal', 'tanggal_akhir', 'dokumen_pengumuman'],
+                'headers' => ['Pengumuman', 'Deskripsi', 'Mulai', 'Selesai'],
+                'body' => ['catatan', 'deskripsi', 'tanggal_awal', 'tanggal_akhir'],
                 'data' => Announcement::whereDate('tanggal_akhir', '>=', Carbon::now())->get()->toArray()
             ],
         ];
